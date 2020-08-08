@@ -1,0 +1,28 @@
+.question_answer_box input {
+  font-size: 25px;
+  margin-right: 5px;
+  width: 70px;
+}
+
+.question_answer_box button {
+  font-size: 25px;
+}
+
+.question_answer_box {
+  font-size: 25px;
+  padding: 15px;
+}
+
+.question_answer_box label {
+  margin-right: 5px;
+}
+
+.question_display {
+  border-bottom: 1px solid #ccc;
+  font-size: 40px;
+}
+
+.question_display span {
+  margin-left: 10px;
+  margin-right: 10px;
+}
