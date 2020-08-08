@@ -17,3 +17,11 @@ export const subscribeToRoom = (cb) => {
     return cb(null)
   })
 }
+
+export const scoreUpdated = (cb) => {
+  if (!socket) return true
+  socket.on('score_updated', (data) => {
+    console.log('Websocket event received!')
+    return cb(null, data)
+  })
+}

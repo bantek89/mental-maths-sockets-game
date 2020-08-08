@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { initiateSocket, disconnectSocket, subscribeToRoom } from './Socket'
+import { initiateSocket, disconnectSocket, subscribeToRoom, scoreUpdated } from './Socket'
 
 import QuestionDisplay from './QuestionDisplay'
 import ScoreDisplay from './ScoreDisplay'
@@ -10,6 +10,7 @@ const QuestionAreaContainer = () => {
   const [currentQuestion, setQuestion] = useState(null)
   const [questionResult, setResult] = useState(null)
   const [alert, setAlert] = useState(false)
+  const [teamScore, setTeamScore] = useState(null)
 
   /**
    * Events sent from server:
@@ -51,6 +52,12 @@ const QuestionAreaContainer = () => {
       if (err) return
       setAlert(true)
     })
+
+    scoreUpdated((err, data) => {
+      if (err) return
+      setTeamScore(data.currentCount)
+    })
+
     return () => {
       disconnectSocket()
     }
@@ -72,6 +79,7 @@ const QuestionAreaContainer = () => {
     <>
       <ScoreDisplay questionResult={questionResult} />
       <DisplayNewUserAlert alert={alert} />
+      <h1>Team Score: {teamScore}</h1>
       <QuestionDisplay
         question={currentQuestion}
         questionResult={questionResult}
