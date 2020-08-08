@@ -36,9 +36,7 @@ competition.handleJoin = (socket) => {
   competition.addListeners(socket)
 }
 
-competition.addListeners = (socket) => {
-  //TODO add listeners for frontend triggered events
-}
+competition.addListeners = (socket) => {}
 
 competition.incrementCorrectAnswers = () => {
   currentCount = currentCount + 1
