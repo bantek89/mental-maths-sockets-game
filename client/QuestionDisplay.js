@@ -9,12 +9,24 @@ const QuestionDisplay = ({ handleNextQuestion, handleSubmitAnswer, question, que
     return <h3>Loading...</h3>
   }
 
+  const DisplayOperation = ({ question }) => {
+    return (
+      <span>
+        {question.operation === '+' || question.operation === '-' ? (
+          <span>{question.operation}</span>
+        ) : null}
+        {question.operation === '*' ? <span>x</span> : null}
+        {question.operation === '/' ? <span>÷</span> : null}
+      </span>
+    )
+  }
+
   return (
     <div className="question_display_wrapper">
       <div className="question_display">
         <p>
           <span>{question.left}</span>
-          <span>{question.operation}</span>
+          <DisplayOperation question={question} />
           <span>{question.right}</span>
         </p>
       </div>
