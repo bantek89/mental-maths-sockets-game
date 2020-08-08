@@ -3,6 +3,7 @@ import Axios from 'axios'
 import io from 'socket.io-client'
 
 import QuestionDisplay from './QuestionDisplay'
+import ScoreDisplay from './ScoreDisplay'
 
 const QuestionAreaContainer = () => {
   const [currentQuestionId, setQuestionId] = useState(null)
@@ -34,7 +35,7 @@ const QuestionAreaContainer = () => {
   const handleSubmitAnswer = (userResponse) => {
     Axios.post('/api/answer', {
       id: currentQuestionId,
-      answer: userResponse
+      answer: userResponse,
     }).then((response) => {
       setResult(response.data.result)
     })
@@ -46,7 +47,7 @@ const QuestionAreaContainer = () => {
 
   return (
     <>
-      {/* Add your score display component here */}
+      <ScoreDisplay questionResult={questionResult} />
       <QuestionDisplay
         question={currentQuestion}
         questionResult={questionResult}
