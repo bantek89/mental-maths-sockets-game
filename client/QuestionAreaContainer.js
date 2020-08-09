@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import { initiateSocket, disconnectSocket, subscribeToRoom, scoreUpdated } from './Socket'
+import {
+  initiateSocket,
+  disconnectSocket,
+  subscribeToRoom,
+  scoreUpdated,
+  targetReached,
+} from './Socket'
 
 import QuestionDisplay from './QuestionDisplay'
 import ScoreDisplay from './ScoreDisplay'
@@ -9,8 +15,9 @@ const QuestionAreaContainer = () => {
   const [currentQuestionId, setQuestionId] = useState(null)
   const [currentQuestion, setQuestion] = useState(null)
   const [questionResult, setResult] = useState(null)
-  const [alert, setAlert] = useState(false)
+  const [newUserAlert, setNewUserAlert] = useState(false)
   const [teamScore, setTeamScore] = useState(null)
+  const [congratsMessage, setCongrats] = useState(false)
 
   /**
    * Events sent from server:
@@ -23,8 +30,6 @@ const QuestionAreaContainer = () => {
    *                             followed immediately by a "score_update" message to inform of new target
    */
 
-  const room = 'playing'
-
   const fetchQuestion = () => {
     Axios.get('/api/question').then((response) => {
       let upNext = response.data
@@ -32,6 +37,7 @@ const QuestionAreaContainer = () => {
       setQuestion(upNext.question)
       setQuestionId(upNext.id)
       setResult(null)
+      if (congratsMessage) setCongrats(false)
     })
   }
 
@@ -47,10 +53,11 @@ const QuestionAreaContainer = () => {
   useEffect(() => {
     fetchQuestion()
 
+    const room = 'playing'
     if (room) initiateSocket(room)
     subscribeToRoom((err) => {
       if (err) return
-      setAlert(true)
+      setNewUserAlert(true)
     })
 
     scoreUpdated((err, data) => {
@@ -58,28 +65,38 @@ const QuestionAreaContainer = () => {
       setTeamScore(data.currentCount)
     })
 
+    targetReached((err) => {
+      if (err) return
+      setCongrats(true)
+    })
+
     return () => {
       disconnectSocket()
     }
   }, [])
 
-  const DisplayNewUserAlert = ({ alert }) => {
+  const NewUserDisplay = ({ newUserAlert }) => {
     useEffect(() => {
       if (alert) {
         setTimeout(() => {
-          setAlert(false)
+          setNewUserAlert(false)
         }, 3000)
       }
     }, [])
 
-    return <span>{alert ? <p>New user joined!</p> : null}</span>
+    return <span>{newUserAlert ? <p>New user joined!</p> : null}</span>
+  }
+
+  const CongratsDisplay = ({ congratsMessage }) => {
+    return <span>{congratsMessage ? <h2>Well Done! You have reached the target!</h2> : null}</span>
   }
 
   return (
     <>
       <ScoreDisplay questionResult={questionResult} />
-      <DisplayNewUserAlert alert={alert} />
+      <NewUserDisplay newUserAlert={newUserAlert} />
       <h1>Team Score: {teamScore}</h1>
+      <CongratsDisplay congratsMessage={congratsMessage} />
       <QuestionDisplay
         question={currentQuestion}
         questionResult={questionResult}

@@ -13,7 +13,6 @@ export const disconnectSocket = () => {
 export const subscribeToRoom = (cb) => {
   if (!socket) return true
   socket.on('player_joined', () => {
-    console.log('Websocket event received!')
     return cb(null)
   })
 }
@@ -21,7 +20,13 @@ export const subscribeToRoom = (cb) => {
 export const scoreUpdated = (cb) => {
   if (!socket) return true
   socket.on('score_updated', (data) => {
-    console.log('Websocket event received!')
     return cb(null, data)
+  })
+}
+
+export const targetReached = (cb) => {
+  if (!socket) return true
+  socket.on('target_reached', () => {
+    return cb(null)
   })
 }
