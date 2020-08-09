@@ -20,6 +20,7 @@
 .question_display {
   border-bottom: 1px solid #ccc;
   font-size: 40px;
+  text-align: center;
 }
 
 .question_display span {
@@ -28,9 +29,9 @@
 }
 
 .question_display_wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 140px);
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
