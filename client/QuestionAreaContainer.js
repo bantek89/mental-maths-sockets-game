@@ -8,8 +8,11 @@ import {
   targetReached,
 } from './Socket'
 
+import './css/CongratsDisplay.css'
+
 import QuestionDisplay from './QuestionDisplay'
 import ScoreDisplay from './ScoreDisplay'
+import NewUserDisplay from './NewUserDisplay'
 
 const QuestionAreaContainer = () => {
   const [currentQuestionId, setQuestionId] = useState(null)
@@ -75,27 +78,22 @@ const QuestionAreaContainer = () => {
     }
   }, [])
 
-  const NewUserDisplay = ({ newUserAlert }) => {
-    useEffect(() => {
-      if (alert) {
-        setTimeout(() => {
-          setNewUserAlert(false)
-        }, 3000)
-      }
-    }, [])
-
-    return <span>{newUserAlert ? <p>New user joined!</p> : null}</span>
-  }
-
   const CongratsDisplay = ({ congratsMessage }) => {
-    return <span>{congratsMessage ? <h2>Well Done! You have reached the target!</h2> : null}</span>
+    return (
+      <span>
+        {congratsMessage ? (
+          <div className="congrats-display_alert">
+            <img src="/img/balloons.png" alt="Balloons" className="bounce" />
+            <h2>Well Done! Your team have reached the target!</h2>
+          </div>
+        ) : null}
+      </span>
+    )
   }
 
   return (
     <>
-      <ScoreDisplay questionResult={questionResult} />
-      <NewUserDisplay newUserAlert={newUserAlert} />
-      <h1>Team Score: {teamScore}</h1>
+      <ScoreDisplay questionResult={questionResult} teamScore={teamScore} />
       <CongratsDisplay congratsMessage={congratsMessage} />
       <QuestionDisplay
         question={currentQuestion}
@@ -103,6 +101,7 @@ const QuestionAreaContainer = () => {
         handleSubmitAnswer={handleSubmitAnswer}
         handleNextQuestion={fetchQuestion}
       />
+      <NewUserDisplay newUserAlert={newUserAlert} setNewUserAlert={setNewUserAlert} />
     </>
   )
 }

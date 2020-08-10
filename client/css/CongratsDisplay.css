@@ -1,0 +1,47 @@
+.congrats-display_alert {
+  align-items: center;
+  background-color: cornflowerblue;
+  border-radius: 50%;
+  border: #e67e22 solid 10px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+  justify-content: center;
+  left: 50%;
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 1;
+}
+
+.congrats-display_alert h2 {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  width: 300px;
+}
+
+.bounce {
+  -webkit-animation: bounce 1s infinite alternate;
+  animation: bounce 1s infinite alternate;
+  margin-top: 50px;
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-15px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-15px);
+  }
+}

@@ -1,0 +1,30 @@
+.new-user_alert {
+  -webkit-text-emphasis-position: under right;
+  -webkit-text-emphasis: filled circle #c69ef0;
+  bottom: 5%;
+  color: #d35400;
+  font-size: 30px;
+  left: 50px;
+  position: absolute;
+  text-emphasis-position: under right;
+  text-emphasis: filled circle #c69ef0;
+  transition: top ease 0.5s;
+}
+
+.new-user_alert p {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+.fadeInBottom {
+  animation-name: fadeInBottom;
+}
+@keyframes fadeInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+  }
+}

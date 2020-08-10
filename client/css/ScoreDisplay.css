@@ -1,0 +1,35 @@
+.score-display {
+  padding-left: 20px;
+}
+
+.score-display th,
+td {
+  padding: 20px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.score-display div {
+  -webkit-text-emphasis: none;
+  background-color: #95c43a;
+  border-radius: 10px;
+  border: #95c43a solid 5px;
+  border: #ffffff solid 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  color: #ffffff;
+  font-size: 60px;
+  justify-self: center;
+  padding: 10px;
+  text-align: center;
+  text-emphasis: none;
+}
+
+.score-display th {
+  -webkit-text-emphasis-position: under right;
+  -webkit-text-emphasis: filled circle #d35400;
+  color: #d35400;
+  font-size: 20px;
+  padding-bottom: 0;
+  text-emphasis-position: under right;
+  text-emphasis: filled circle #d35400;
+}

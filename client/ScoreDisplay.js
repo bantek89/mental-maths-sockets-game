@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
-const ScoreDisplay = ({ questionResult }) => {
+import './css/ScoreDisplay.css'
+
+const ScoreDisplay = ({ questionResult, teamScore }) => {
   const [score, setScore] = useState(0)
 
   useEffect(() => {
@@ -9,7 +11,26 @@ const ScoreDisplay = ({ questionResult }) => {
     }
   }, [questionResult])
 
-  return <h2>Your score: {score}</h2>
+  return (
+    <table className="score-display">
+      <thead>
+        <tr>
+          <th>Team Score:</th>
+          <th>Your score:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div>{teamScore}</div>
+          </td>
+          <td>
+            <div>{score}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )
 }
 
 export default ScoreDisplay
