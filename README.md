@@ -1,3 +1,7 @@
+# FINAL PRODCUT
+
+![Screenshot of game](https://i.imgur.com/hpyLmlr.png)
+
 # DEVELOPER INTERVIEW TECHNICAL PROBLEMS GUIDE
 
 ## TASKS
