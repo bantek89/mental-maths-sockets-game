@@ -7,31 +7,39 @@ const utils = require('./utils')
 
 storage.init()
 
-question.generateQuestion = () => {
+const newQuestion = () => {
   let generateRandomQuestion = () => {
     const questionOptions = [
-      question.generatQuestion('+'),
-      question.generatQuestion('-'),
-      question.generatQuestion('*'),
-      question.generatQuestion('/'),
+      question.generateQuestionObj('+'),
+      question.generateQuestionObj('-'),
+      question.generateQuestionObj('*'),
+      question.generateQuestionObj('/'),
     ]
-
     return questionOptions[Math.floor(Math.random() * questionOptions.length)]
   }
 
-  let newQuestion = generateRandomQuestion()
+  let generatedQuestion = generateRandomQuestion()
 
+  if (Number.isInteger(question.getCorrectAnswer(generatedQuestion))) {
+    return generatedQuestion
+  } else {
+    return newQuestion()
+  }
+}
+
+question.generateQuestion = () => {
   let uniqueId = utils.generateUniqueId()
+  let question = newQuestion()
 
-  return storage.setItem(uniqueId, newQuestion).then(() => {
+  return storage.setItem(uniqueId, question).then(() => {
     return {
       id: uniqueId,
-      question: newQuestion,
+      question,
     }
   })
 }
 
-question.generatQuestion = (operation) => {
+question.generateQuestionObj = (operation) => {
   return {
     left: utils.generateNumber(9),
     right: utils.generateNumber(9),
